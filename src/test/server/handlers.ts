@@ -19,7 +19,7 @@ const handlers = [
       return res(ctx.json(citaBartJson));
     }
     return res(ctx.json([]));
-  }),
+  })
 ];
 
 export default handlers;

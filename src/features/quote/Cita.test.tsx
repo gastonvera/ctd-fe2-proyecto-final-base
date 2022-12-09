@@ -53,18 +53,42 @@ describe("<Cita/>", () => {
           name: /obtener cita/i,
         })
       );
+      /* await waitFor(
+        () => {
+          expect(screen.getByText(/homer simpson/i)).toBeInTheDocument();
+        },
+        { timeout: 3000 }
+      ); */
       expect(screen.getByText(/CARGANDO.../i)).toBeInTheDocument();
       expect(
         await screen.findByRole("textbox", {
           name: /author cita/i,
         })
       ).toHaveValue("homer");
-      await waitFor(
-        () => {
-          expect(screen.getByText("homer simpson")).toBeInTheDocument();
-        },
-        { timeout: 3000 }
+    });
+    it("el usuario hace click en borrar", async () => {
+      setup();
+      await userEvent.type(
+        screen.getByRole("textbox", {
+          name: /author cita/i,
+        }),
+        "homer"
       );
+      expect(
+        await screen.findByRole("textbox", {
+          name: /author cita/i,
+        })
+      ).toHaveValue("homer");
+      await userEvent.click(
+        screen.getByRole("button", {
+          name: /borrar/i,
+        })
+      );
+      expect(
+        await screen.findByRole("textbox", {
+          name: /author cita/i,
+        })
+      ).toHaveValue("");
     });
   });
 });
