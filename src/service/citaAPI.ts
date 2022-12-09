@@ -1,5 +1,5 @@
-import { API_URL } from "../../app/constants";
-import { ICita } from "./types";
+import { API_URL } from "../app/constants";
+import { ICita } from "../interfaces/types";
 
 export const obtenerCita: (personaje?: string) => Promise<ICita> = async (
   personaje

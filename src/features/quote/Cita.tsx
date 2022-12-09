@@ -7,10 +7,10 @@ import {
   limpiar,
   obtenerEstadoDelPedido,
   obtenerCitaDeLaAPI,
-} from "./citaSlice";
-import { obtenerMensaje } from "./utils";
+} from "../../app/slices/citaSlice";
+import { obtenerMensaje } from "../../utils/utils";
 
-function Cita() {
+const Cita = () => {
   const [valorInput, setValorInput] = useState("");
   const { cita = "", personaje = "" } =
     useAppSelector(obtenerCitaDelEstado, shallowEqual) || {};

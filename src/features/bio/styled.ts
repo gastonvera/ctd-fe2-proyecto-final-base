@@ -47,10 +47,10 @@ export const BotonBio = styled.button<Props>`
   margin: 1rem;
   font-family: "Homer Simpson Revised", sans-serif;
   font-size: 1.4rem;
-  background-color: ${(p) => (p.isActive ? "#fdd835" : "whitesmoke")};
-  color: ${(p) => (p.isActive ? "whitesmoke" : "black")};
-  text-shadow: ${(p) =>
-    p.isActive
+  background-color: ${(props) => (props.isActive ? "#fdd835" : "whitesmoke")};
+  color: ${(props) => (props.isActive ? "whitesmoke" : "black")};
+  text-shadow: ${(props) =>
+    props.isActive
       ? `2px 2px 0 #000000, 2px -2px 0 #000000, -2px 2px 0 #000000,
     -2px -2px 0 #000000, 2px 0px 0 #000000, 0px 2px 0 #000000,
     -2px 0px 0 #000000, 0px -2px 0 #000000`

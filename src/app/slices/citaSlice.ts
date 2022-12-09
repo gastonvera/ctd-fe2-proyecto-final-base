@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AppDispatch, RootState } from "../../app/store";
-import { ESTADO_FETCH } from "./constants";
-import { obtenerCita } from "./citaAPI";
-import { ICita } from "./types";
+import { AppDispatch, RootState } from "../store";
+import { ESTADO_FETCH } from "../../features/quote/constants";
+import { obtenerCita } from "../../service/citaAPI";
+import { ICita } from "../../interfaces/types";
 
 export interface EstadoCita {
   data: ICita | null;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { SuscribeImage, CloseButton as Close } from "../../assets";
-import { obtenerNoticias } from "./fakeRest";
+import obtenerInformacionNoticias from "../../helpers/obtenerInformacionNoticias";
+import { INoticiasNormalizadas } from "../../interfaces/Interfaces";
 import {
   CloseButton,
   TarjetaModal,
@@ -21,67 +22,28 @@ import {
   CotenedorTexto,
 } from "./styled";
 
-export interface INoticiasNormalizadas {
-  id: number;
-  titulo: string;
-  descripcion: string;
-  fecha: number | string;
-  esPremium: boolean;
-  imagen: string;
-  descripcionCorta?: string;
-}
-
 const Noticias = () => {
   const [noticias, setNoticias] = useState<INoticiasNormalizadas[]>([]);
   const [modal, setModal] = useState<INoticiasNormalizadas | null>(null);
 
   useEffect(() => {
-    const obtenerInformacion = async () => {
-      const respuesta = await obtenerNoticias();
-
-      const data = respuesta.map((n) => {
-        const titulo = n.titulo
-          .split(" ")
-          .map((str) => {
-            return str.charAt(0).toUpperCase() + str.slice(1);
-          })
-          .join(" ");
-
-        const ahora = new Date();
-        const minutosTranscurridos = Math.floor(
-          (ahora.getTime() - n.fecha.getTime()) / 60000
-        );
-
-        return {
-          id: n.id,
-          titulo,
-          descripcion: n.descripcion,
-          fecha: `Hace ${minutosTranscurridos} minutos`,
-          esPremium: n.esPremium,
-          imagen: n.imagen,
-          descripcionCorta: n.descripcion.substring(0, 100),
-        };
-      });
-
-      setNoticias(data);
-    };
-
-    obtenerInformacion();
+    obtenerInformacionNoticias()
+      .then((response: INoticiasNormalizadas[]) => setNoticias(response));
   }, []);
 
   return (
     <ContenedorNoticias>
       <TituloNoticias>Noticias de los Simpsons</TituloNoticias>
       <ListaNoticias>
-        {noticias.map((n) => (
+        {noticias.map((noticia) => (
           <TarjetaNoticia>
-            <ImagenTarjetaNoticia src={n.imagen} />
-            <TituloTarjetaNoticia>{n.titulo}</TituloTarjetaNoticia>
-            <FechaTarjetaNoticia>{n.fecha}</FechaTarjetaNoticia>
+            <ImagenTarjetaNoticia src={noticia.imagen} />
+            <TituloTarjetaNoticia>{noticia.titulo}</TituloTarjetaNoticia>
+            <FechaTarjetaNoticia>{noticia.fecha}</FechaTarjetaNoticia>
             <DescripcionTarjetaNoticia>
-              {n.descripcionCorta}
+              {noticia.descripcionCorta}
             </DescripcionTarjetaNoticia>
-            <BotonLectura onClick={() => setModal(n)}>Ver más</BotonLectura>
+            <BotonLectura onClick={() => setModal(noticia)}>Ver más</BotonLectura>
           </TarjetaNoticia>
         ))}
         {modal ? (
