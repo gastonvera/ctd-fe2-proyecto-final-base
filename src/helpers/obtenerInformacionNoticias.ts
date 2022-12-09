@@ -1,5 +1,9 @@
 import { obtenerNoticias } from "../features/news/fakeRest";
 
+/**
+ * Separe esta funcion del componente News porque es una funcion 
+ * que actua como helper entonces se lo podia extraer y luego importar
+ */
 const obtenerInformacionNoticias = async () => {
   const respuesta = await obtenerNoticias();
 

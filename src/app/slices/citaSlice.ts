@@ -51,7 +51,7 @@ export const citaSlice = createSlice({
 
 export const { limpiar } = citaSlice.actions;
 
-export const obtenerCitaDeLaAPI =
+export const  obtenerCitaDeLaAPI =
   (personaje: string) => (dispatch: AppDispatch) => {
     dispatch(limpiar());
     dispatch(obtenerCitaAsync(personaje));

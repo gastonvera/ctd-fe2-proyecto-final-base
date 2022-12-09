@@ -1,3 +1,5 @@
+import { NombresSimpsons } from "../features/bio/constants";
+
 export interface INoticiasNormalizadas {
   id: number;
   titulo: string;
@@ -9,6 +11,16 @@ export interface INoticiasNormalizadas {
 }
 
 export interface BotonesBioProps {
-    bioActiva: any;
-    onClick: any;
+  bioActiva: {
+    id: NombresSimpsons;
+    nombre: string;
+    descripcion: string;
+    image: string;
+  };
+  onClick: (nombre: NombresSimpsons) => void;
+}
+
+export interface ModalNoticiaProps {
+  modal: INoticiasNormalizadas;
+  setModal: React.Dispatch<React.SetStateAction<INoticiasNormalizadas | null>>;
 }
